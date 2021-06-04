@@ -3,8 +3,13 @@
 	"displayName": "Lunch Reminder",
 	"description": "Don't forget to eat lunch!",
 	"version": "0.0.1",
+	"publisher": "AspieSoft",
 	"author": "AspieSoft",
 	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/aspiesoft/vscode-lunch-reminder.git"
+	},
 	"engines": {
 		"vscode": "^1.56.0"
 	},
