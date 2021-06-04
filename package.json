@@ -2,7 +2,7 @@
 	"name": "vscode-lunch-reminder",
 	"displayName": "Lunch Reminder",
 	"description": "Don't forget to eat lunch!",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"publisher": "AspieSoft",
 	"author": "AspieSoft",
 	"license": "MIT",
