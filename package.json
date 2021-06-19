@@ -2,7 +2,7 @@
 	"name": "vscode-lunch-reminder",
 	"displayName": "Lunch Reminder",
 	"description": "Don't forget to eat lunch!",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"publisher": "AspieSoft",
 	"author": "AspieSoft",
 	"license": "MIT",
@@ -17,7 +17,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:vscode-lunch-reminder.helloWorld"
+		"onStartupFinished"
 	],
 	"main": "./extension.js",
 	"contributes": {
