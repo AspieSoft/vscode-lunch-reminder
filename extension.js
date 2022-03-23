@@ -89,20 +89,20 @@ function activate(context){
 
 			if(allowDone && value.toString().toLowerCase() === 'done'){
 				doneReminder();
-				vscode.window.showInformationMessage('Stopped Lunch Reminder!');
+        alertOnce('stopped', 'Stopped Lunch Reminder!');
 				showingBox = false;
 				return;
 			}
 
 			if(value.toString().toLowerCase() === 'ok'){
-				vscode.window.showInformationMessage('Remember to spend at least 5 minutes eating lunch');
+        alertOnce('reminder', 'Remember to spend at least 5 minutes eating lunch');
 				showingBox = false;
 				return;
 			}
 
 			if(forceStopCMD && value.toString().toLowerCase() === forceStopCMD){
 				doneReminder();
-				vscode.window.showInformationMessage('Force Stopped Lunch Reminder!');
+        alertOnce('stopped', 'Force Stopped Lunch Reminder!');
 				showingBox = false;
 				return;
 			}
@@ -144,7 +144,7 @@ function activate(context){
 
 				if(forceStopCMD && value.toString().toLowerCase() === forceStopCMD){
 					doneReminder();
-					vscode.window.showInformationMessage('Force Stopped Lunch Reminder!');
+          alertOnce('stopped', 'Force Stopped Lunch Reminder!');
 					showingBox = false;
 					return;
 				}
@@ -156,7 +156,7 @@ function activate(context){
 		}
 
 		doneReminder();
-		vscode.window.showInformationMessage('Stopped Lunch Reminder!');
+    alertOnce('stopped', 'Stopped Lunch Reminder!');
 		showingBox = false;
 	}
 
@@ -165,7 +165,7 @@ function activate(context){
 		let now = new Date().getTime();
 		if(now > lastAction + (60000*stopIdleTime)){
 			doneReminder();
-			vscode.window.showInformationMessage('Auto Stopped Lunch Reminder!');
+      alertOnce('stopped', 'Auto Stopped Lunch Reminder!');
 			return;
 		}
 		let hour = new Date().getHours();
@@ -207,6 +207,26 @@ function deactivate(){
 		interval = undefined;
 	}
 }
+
+const alerts = {};
+function alertOnce(type, msg){
+  if(alerts[type]){
+    return;
+  }
+  alerts[type] = new Date().getTime();
+  vscode.window.showInformationMessage(msg);
+}
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const expire = 1000 * 60 * 120; // 2 hours
+  const types = Object.keys(alerts);
+  for(let i = 0; i < types.length; i++){
+    if(now - alerts[types[i]] > expire){
+      delete alerts[types[i]];
+    }
+  }
+}, 10000);
 
 module.exports = {
 	activate,
